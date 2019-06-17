@@ -8,22 +8,22 @@ function router(req, res) {
 
 	switch(true) {
 		case /^\/?$/.test(url):
-			render("index", res, {title: "~>^<~"});
+			render("index", res);
 		break;
-		case /^\/admin\/?([^\?]*)?/.test(url):
-			render("view/admin/" + (RegExp.$1 || "index"), res, {title: "~>^<~"});
+		case /^(\/view)?\/admin\/?([^\?]*)?/.test(url):
+			render("view/admin/" + (RegExp.$1 || "index"), res);
 		break;
-		case /^\/dashboard\/?([^\?]*)?/.test(url):
-			render("view/dashboard/" + (RegExp.$1 || "index"), res, {title: "~>^<~"});
+		case /^(\/view)?\/dashboard\/?([^\?]*)?/.test(url):
+			render("view/dashboard/" + (RegExp.$1 || "index"), res);
 		break;
-		case /^\/map\/?([^\?]*)?/.test(url):
-			render("view/map/" + (RegExp.$1 || "index"), res, {title: "~>^<~"});
+		case /^(\/view)?\/map\/?([^\?]*)?/.test(url):
+			render("view/map/" + (RegExp.$1 || "index"), res);
 		break;
-		case /^\/webgl\/?([^\?]*)?/.test(url):
-			render("view/webgl/" + (RegExp.$1 || "index"), res, {title: "~>^<~"});
+		case /^(\/view)?\/webgl\/?([^\?]*)?/.test(url):
+			render("view/webgl/" + (RegExp.$1 || "index"), res);
 		break;
-		case /^\/pad\/?([^\?]*)?/.test(url):
-			render("view/ePad/" + (RegExp.$1 || "index"), res, {title: "~>^<~"});
+		case /^(\/view)?\/ePad\/?([^\?]*)?/.test(url):
+			render("view/ePad/" + (RegExp.$1 || "index"), res);
 		break;
 		default:
 	}
