@@ -41,7 +41,7 @@ function render(file, res, params) {
 				var reg = new RegExp("{{" + key + "}}", "ig");
 				content = content.replace(reg, params[key]);
 			}
-        }
+    }
 
 		res.writeHead(200, {'Content-type' : MIME_TYPE[ext]});
 		res.write(content, "binary");
