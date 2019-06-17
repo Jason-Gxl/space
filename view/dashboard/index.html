@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{title}}</title>
+        <style type="text/css">
+            html, body {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+            }
+            
+            .wrap {
+                width: 100%;
+                height: 100%;
+                /* transform: scale(0.65); */
+            }
+
+            .wrap .dashboard-item:nth-child(2) {
+                left: 500px;
+            }
+
+            .wrap .dashboard-item {
+                /* border: solid 1px #cdcdcd; */
+                left: 30px;
+                top: 30px;
+                /* overflow: hidden; */
+            }
+        </style>
+        <link type="text/css" rel="stylesheet" href="/static/css/dashboard/index.css"></link>
+        <link type="text/css" rel="stylesheet" href="/static/css/dashboard/custom-components.css"></link>
+    </head>
+    <body>
+        <div id="wrap" class="wrap"></div>
+    </body>
+    <script type="text/javascript" src="/static/js/dashboard/echarts.min.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard/util.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard/chart.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard/dashboard.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard/custom-components.js"></script>
+    <script type="text/javascript">
+        var aa = {
+            id: 0,
+            // scale: 0.65,    
+            wrap: document.getElementById("wrap")
+        };
+
+        var d = dashboard.init(aa);
+
+        // d.params.scale = 1;
+
+        var option1 = {
+            title: {
+                text: 'ECharts 入门示例'
+            },
+            tooltip: {},
+            legend: {
+                data:['销量']
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }]
+        };
+
+        var myChart1 = d.initChart({
+            id: 0,
+            dragable: true,
+            chartOptions: option1,
+            showTitle: false,
+            filters: {age: {type: "Number", default: 28, status: true, label: "年龄"}, name: {label: "姓名", type: "String", default: "Jason"}, sex: {type: "date", default: 1}},
+            // time: 2000,
+            click: function(e) {
+                console.log(0);
+                option1.xAxis.data.pop();
+                option1.series[0].data.pop();
+                myChart1.setOption(option1);
+                return [{key: "name", value: e.name, links: [1], dashboardId: 0}];
+            },
+            filterCallback: function(param) {
+                // this.dashboard.params.id==param.dashboardId
+                console.log(param);
+
+                if(this.dashboard.params.id==param.dashboardId) {
+                    option1.xAxis.data.pop();
+                    option1.series[0].data.pop();
+                    myChart1.setOption(option1);
+                } else {
+                    if(dashboard.getDashboard(param.dashboardId)) {
+                        dashboard.getDashboard(param.dashboardId).filter(param);
+                    }
+                }
+            },
+            filterChange: function(param) {
+                return [{key: param.name, value: param.value, links: [1], dashboardId: 0}];
+            },
+            timeCallback: function() {
+                option1.xAxis.data.pop();
+                option1.series[0].data.pop();
+                myChart1.setOption(option1);
+                return [{key: "name", value: e.name, links: [1], dashboardId: 0}];
+            },
+            deleteCallback: function() {
+                alert("删除成功");
+            }
+        });
+
+        var option2 =  {
+            title : {
+                text: '某站点用户访问来源',
+                subtext: '纯属虚构',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+            },
+            series : [
+                {
+                    name: '访问来源',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:335, name:'直接访问'},
+                        {value:310, name:'邮件营销'},
+                        {value:234, name:'联盟广告'},
+                        {value:135, name:'视频广告'},
+                        {value:1548, name:'搜索引擎', aa: "aa"}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        var myChart2 = d.initChart({
+            id: 1,
+            dragable: true,
+            wrap: document.getElementById("wrap"),
+            chartOptions: option2,
+            showTitle: true,
+            title: "1111",
+            time: 2000,
+            dispatchActionType: "data",
+            seriesIndex: 0,
+            css: {title: {"font-size": 20}, wrap: {width: 500, left:450}},
+            filters: {name: {type: "String", status: true}},
+            click: function(e) {
+                return [{key: "name", value: e.name, links: [0], dashboardId: 0}];
+            },
+            filterCallback: function(param) {
+                console.log(param);
+                option2.legend.data.pop();
+                option2.series[0].data.pop();   
+                myChart2.setOption(option2);
+            },
+            settingCallback: function() {
+                console.log(this.params);
+            },
+            timeCallback: function(data, type) {
+                console.log(data, type);
+            },
+            error: function(err) {
+                console.log(err.message);
+            }
+        });
+
+        // myChart1.css("background-color", "green");
+
+        // dashboard.extendChart("aa", function() {
+        //     console.log(this);
+        //     this.ele.style.background = "red";
+        // });
+
+        // myChart1.aa();
+        var option3 = {
+            type: "table",
+            hideTitle: false,
+            showOrder: true,
+            style: {
+                head: {
+                    // background: "#cdcdcd",
+                    // color: "#000"
+                },
+                body: {
+                    // background: "red",
+                    // color: "blue"
+                }
+            },
+            data: {"AVG(request_timer)":[629.0000,200.0612,2349.0370,350.9286,90.7500,44.1250,907.9400,103.6364,65.3030,12775.1053,6651.8750,3238.0000,2157.6667,404.0000,729.9474,461.6284,1652.0000,96.8182,612.1667,6146.6667,39.5714,129.1765,328.9811,86.0000],"oper_url":["/dashboard/delete","/dashboard/info","/dashboard/list","/dashboard/save","/datasource/check","/datasource/delete","/datasource/info","/datasource/list","/datasource/list/page","/datasource/result","/datasource/save","/datasource/valid","/graphic/dashboads","/graphic/delete","/graphic/info","/graphic/list","/graphic/list/rich","/graphic/save","/link/list","/link/restdata","/sql/info","/sql/list","/sql/result","/sql/save"],"count(oper_url)":[5,196,27,14,8,8,50,22,66,19,16,15,6,1,19,401,1,11,12,6,14,34,106,10]}
+        };
+
+        var myChart3 = d.initChart({
+            wrap: document.getElementById("wrap"),
+            // chartOptions: option3,
+            type: 100,
+            id: 3,
+            showTitle: true,
+            title: "444",
+            css: {title: {"font-size": 20}, wrap: {width: 500, left:1000}},
+        });
+
+        myChart3.setOption(option3);
+
+        var option4 = {
+            type: "plack",
+            separateLine: true,
+            lineCount: 1,
+            style: {
+                background: "green",
+                borderColor: "blue",
+                head: {
+                    color: "yellow",
+                    fontSize: "18px"
+                },
+                body: {
+                    color: "red",
+                    fontSize: "30px"
+                }
+            },
+            data: [{name: "姓名", value: "Jason"}, {name: "年龄", value: 29}]
+        };
+
+        var myChart4 = d.initChart({
+            wrap: document.getElementById("wrap"),
+            dragable: true,
+            chartOptions: option4,
+            type: 100,
+            id: 4,
+            css: {title: {"font-size": 20}, wrap: {width: 500, height: 200, top: 400}},
+        });
+    </script>
+</html>

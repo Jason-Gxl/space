@@ -1,0 +1,278 @@
+.dashboard-item {
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+}
+
+.hide {
+    display: none;
+}
+
+.dashboard-item .chart-wrap {
+    width: 100%;
+    height: var(--height);
+    position: absolute;
+    overflow: hidden;
+}
+
+.dashboard-item .chart-wrap .chart-wrap-inner {
+    min-width: 100%;
+    min-height: 100%;
+    position: absolute;
+}
+
+.dashboard-item .title-wrap {
+    display: none;
+}
+
+.dashboard-item.show-title .title-wrap {
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    background: #cdcdcd;
+    line-height: 30px;
+}
+
+/* 定位 */
+.dashboard-item .pos-wrap {
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.dashboard-item.has-pos .pos-wrap {
+    display: inline-block;
+}
+
+.dashboard-item .pos-top, .dashboard-item .pos-bottom {
+    width: 100%;
+}
+
+.dashboard-item .pos-top {
+    top: -30px;
+}
+
+.dashboard-item .pos-bottom {
+    bottom: -30px;
+}
+
+.dashboard-item .pos-left,  .dashboard-item .pos-right{
+    width: 55px;
+    height: 100%;
+    text-align: center;
+}
+
+.dashboard-item .pos-left {
+    left: -57px;
+}
+
+.dashboard-item .pos-right {
+    right: -57px;
+}
+
+.dashboard-item .pos-wrap input{
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    border: solid 1px #cdcdcd;
+    border-radius: 5px;
+    outline: none;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+}
+
+.dashboard-item.show-pos-left .pos-left, .dashboard-item.show-pos-right .pos-right, .dashboard-item.show-pos-top .pos-top, .dashboard-item.show-pos-bottom .pos-bottom {
+    visibility: visible;
+    z-index: 9999;
+}
+/* 定位 */
+
+.dashboard-item ul, .dashboard-item li, .dashboard-item a {
+    margin: 0;
+    left: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.dashboard-item .setting-wrap {
+    position: absolute;
+    height: 30px;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 30px;
+    z-index: 100;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+}
+
+.dashboard-item .setting-wrap::after {
+    content: ".";
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    visibility: hidden;
+}
+
+.dashboard-item.show-setting .setting-wrap {
+    display: inline;
+}
+
+.dashboard-item .setting-wrap .btn {
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+    vertical-align: middle;
+}
+
+.dashboard-item .setting-wrap .btn:hover {
+    background: rgb(41, 60, 85);
+}
+
+.dashboard-item .chart-filter-wrap.has-filter {
+    overflow: hidden;
+    padding: 5px;
+}
+
+.dashboard-item .chart-filter-wrap .filter-item-wrap {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 3px;
+}
+
+.dashboard-item .chart-filter-wrap .filter-item-wrap input {
+    width: 145px;
+    border: solid #cdcdcd 1px;
+    border-radius: 3px;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    line-height: 25px;
+    height: 25px;
+}
+
+.dashboard-item .chart-filter-wrap .filter-item-wrap a::before{
+    content: "禁用";
+    color: #fff;
+    background: #293c55;
+    padding: 3px 5px;
+    border-radius: 5px;
+    margin-left: 3px;
+    font-size: 12px;
+}
+
+.dashboard-item .chart-filter-wrap .filter-item-wrap.filter-disable a::before{
+    content: "启用";
+    background: #cdcdcd;
+}
+
+.dashboard-item .chart-filter-wrap .no-btn a{
+    display: none;
+}
+
+.dashboard-item .chart-wrap .chart-scroll {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    visibility: hidden;
+}
+
+.dashboard-item .chart-wrap.show-scroll .chart-scroll {
+    visibility: visible;
+}
+
+.dashboard-item .chart-wrap .scroll-y {
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.dashboard-item .chart-wrap .scroll-x {
+    position: absolute;
+    width: calc(100% - 10px);
+    height: 10px;
+    left: 0;
+    bottom: 0;
+}
+
+.dashboard-item .chart-wrap .scroll-btn {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 5px;
+    position: absolute;
+}
+
+.dashboard-item .chart-wrap .scroll-x .scroll-btn {
+    height: 100%;
+}
+
+.dashboard-item .chart-wrap .scroll-y .scroll-btn {
+    width: 100%;
+}
+
+.dashboard-item .number-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    background: #4876FF;
+    color: #fff;
+    line-height: 28px;
+    padding: 0 2px;
+    border-radius: 2px;
+    display: none;
+}
+
+.dashboard-item.show-number .number-wrap {
+    display: inline-block;
+}
+
+.dashboard-item .number-wrap::before {
+    display: inline-block;
+    content: ".";
+    visibility: hidden;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.dashboard-item .number-wrap input {
+    width: 30px;
+    border: solid 1px #cdcdcd;
+    border-radius: 3px;
+    outline: none;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.measure-line {
+    position: absolute;
+    z-index: 1000000;
+}
+
+.measure-line.x-line {
+    width: 100%;
+    height: 0;
+    border-top: dashed 1px #333;
+    top: -1000px;
+    left: 0;
+}
+
+.measure-line.y-line {
+    width: 0;
+    height: 100%;
+    border-left: dashed 1px #333; 
+    left: -1000px;
+    top: 0;
+}

@@ -1,0 +1,53 @@
+html, body, p, div, ul, li, h1, h2, h3, h4, h5, span, button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+html, body {
+	width: 100vw;
+	height: 100vh;
+	background: #E9EAED;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+.btn {
+    display: inline-block;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.primary-btn {
+	background: #4876FF;
+}
+
+.success-btn {
+	background: #008B00;
+}
+
+.warning-btn {
+	background: #EEC900;
+}
+
+.danger-btn {
+	background: #FF0000;
+}
+
+.s-btn {
+	padding: 5px 20px;
+}
+
+.m-btn {
+	padding: 8px 30px;
+}
+
+.l-btn {
+	padding: 10px 40px;
+}

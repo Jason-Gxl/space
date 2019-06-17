@@ -1,0 +1,46 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>电子白板</title>
+	<meta charset="utf-8">
+	<title>{{title}}</title>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"> -->
+	<link rel="stylesheet" type="text/css" href="/static/font/ePad/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/ePad/index.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./index.css"> -->
+	<link rel="stylesheet" type="text/css" href="/view/ePad/css/index.css">
+</head>
+<body>
+	<div id="pad1"></div>
+	<div id="pad2"></div>
+	<div>
+		<form name="fileForm">
+			<ul class="file-list-wrap">
+				<li class="file-item-wrap">
+					<label>文件路径：</label>
+					<!-- <input type="text" name="file0" value="http://p1.ifengimg.com/a/2018_16/76e833128701da7_size44_w925_h456.jpg"/> -->
+					<input type="text" name="file0" value="/view/ePad/images/22.png"/>
+				</li>
+			</ul>
+			<div class="tab-name-wrap">
+				<label>TAB名称：</label>
+				<input type="text" name="tabName" value=""/>
+			</div>
+		</form>
+		<input type="button" value="添加" id="add_btn"/>
+		<input type="button" value="演示" id="show_btn"/>
+	</div>
+</body>
+<script type="text/javascript" src="/static/js/ePad/pen.js"></script>
+<script type="text/javascript" src="/static/js/ePad/rectangle.js"></script>
+<script type="text/javascript" src="/static/js/ePad/line.js"></script>
+<script type="text/javascript" src="/static/js/ePad/round.js"></script>
+<script type="text/javascript" src="/static/js/ePad/text.js"></script>
+<script type="text/javascript" src="/static/js/ePad/image.js"></script>
+<script type="text/javascript" src="/static/js/ePad/eraser.js"></script>
+<script type="text/javascript" src="/static/js/ePad/ferula.js"></script>
+<script type="text/javascript" src="/static/js/ePad/index.js"></script>
+<!-- <script type="text/javascript" src="/dist/js/index.min.js"></script> -->
+<script type="text/javascript" src="/view/ePad/js/data.js"></script>
+<script type="text/javascript" src="/view/ePad/js/index.js"></script>
+</html>

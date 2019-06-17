@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{title}}</title>
+        <link type="text/css" rel="stylesheet" href="static/common.css"/>
+        <!-- <link type="text/css" rel="stylesheet" href="static/icon/iconfont.css"/> -->
+        <style>
+            .canvas-wrap {
+                width: 100%;
+                height: 98%;
+                position: relative;
+            }
+
+            .canvas-wrap iframe {
+                border: 0;
+            }
+
+            .canvas-wrap .can {
+                width: 400px;
+                height: 560px;
+                top: 30px;
+                left: 1px;
+                border: 0;
+                position: absolute;
+            }
+
+            .canvas-wrap .aa {
+                width: 400px;
+                height: 100%;
+                /* visibility: hidden; */
+            }
+        </style>
+    </head>
+    <body>        
+        <div class="canvas-wrap">
+            <iframe src="static/icon/map/map12.svg" class="aa" id="iframe"></iframe>
+            <canvas id="can" class="can" width="900" height="1247"></canvas>
+        </div>
+    </body>
+    <script type="text/javascript" src="static/el.js"></script>
+    <script type="text/javascript" src="static/map-point/animation.js"></script>
+    <!-- <script type="text/javascript" src="static/twinklePoint.js"></script> -->
+    <script>
+        ;(function() {
+            var canvas = document.getElementById("can");            
+            
+            $("#iframe").addEvent("load", function() {
+                var svgDocument = this.getSVGDocument(),
+                    paths = [].slice.call(svgDocument.getElementById("分组").getElementsByTagName("path"), 0);
+                
+                animation.init({
+                    canvas: canvas,
+                    paths: paths,
+                    lineColor: "#50E6E6",
+                    lineWidth: 2,
+                    speed: 300,
+                    len: 500,
+                    shadowColor: "#000",
+                    shadowBlur: 10
+                });
+            });
+
+            var aa = animation.init({
+                canvas: canvas,
+                type: "point",
+                color: "#DB4643",
+                speed: 5000,
+                groupId: 1, // 分组，可以通过组id获取相同组内所有对象
+                r: 5,   // 圆的半径
+                level: 0,
+                point: [100, 100]
+            });
+
+            animation.getPointByIndex(0).status = 1;  // 通过索引获取到对应对，并把状态设为1，加上光晕
+
+            // var cc = animation.init({
+            //     canvas: canvas,
+            //     type: "point",
+            //     color: "#DB4643",
+            //     speed: 500,
+            //     groupId: 1, // 分组，可以通过组id获取相同组内所有对象
+            //     r: 5,   // 圆的半径
+            //     point: [100, 100]
+            // });
+
+            // animation.getPointByIndex(1).status = 1;  // 通过索引获取到对应对，并把状态设为1，加上光晕
+
+            var bb = animation.init({
+                canvas: canvas,
+                type: "point",
+                color: "#864AFF",
+                speed: 5000,
+                groupId: 1,
+                level: 5,
+                r: 5,
+                point: [200, 200]
+            });
+
+            animation.getPointByIndex(1).status = 1;
+
+            var util = {
+                oneBezier: function(t, p1, p2) {
+                    var x = p1[0] + (p2[0] - p1[0]) * t;
+                    var y = p1[1] + (p2[1] - p1[1]) * t;
+                    return [x, y];
+                },
+                twoBezier: function(t, p1, cp, p2) {
+                    var x = (1 - t) * (1 - t) * p1[0] + 2 * t * (1 - t) * cp[0] + t * t * p2[0];
+                    var y = (1 - t) * (1 - t) * p1[1] + 2 * t * (1 - t) * cp[1] + t * t * p2[1];
+                    return [x, y];
+                },
+                threeBezier: function(t, p1, cp1, cp2, p2) {
+                    var x =
+                        p1[0] * (1 - t) * (1 - t) * (1 - t) +
+                        3 * cp1[0] * t * (1 - t) * (1 - t) +
+                        3 * cp2[0] * t * t * (1 - t) +
+                        p2[0] * t * t * t;
+                    var y =
+                        p1[1] * (1 - t) * (1 - t) * (1 - t) +
+                        3 * cp1[1] * t * (1 - t) * (1 - t) +
+                        3 * cp2[1] * t * t * (1 - t) +
+                        p2[1] * t * t * t;
+
+                    return [x, y];
+                }
+            };
+        }());
+    </script>
+</html>

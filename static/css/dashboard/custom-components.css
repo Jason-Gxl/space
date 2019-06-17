@@ -1,0 +1,101 @@
+ul, li, a {
+    list-style: none;
+    text-decoration: none;
+}
+
+/* table */
+.custom-components-table {
+    border-collapse: collapse; 
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.custom-components-table tr, .custom-components-table td, .custom-components-table th {
+    padding: none;
+}
+
+.custom-components-table td {
+    border: solid 1px;
+    border-left: none;
+    border-right: none;
+}
+
+.custom-components-table thead {
+    --background: rgba(0, 0, 0, 0);
+    --color: rgba(0, 0, 0, 1);
+}
+
+.custom-components-table thead tr{
+    background: var(--background);
+    line-height: 33px;
+    color: var(--color);
+}
+
+.custom-components-table tbody {
+    --background: rgba(0, 0, 0, 0);
+    --color: rgba(0, 0, 0, 1);
+}
+
+.custom-components-table tbody tr {
+    line-height: 33px;
+    background: var(--background);
+    color: var(--color);
+}
+/* table */
+
+/* plack */
+.plack-wrap {
+    display: table;
+    width: 100%;
+    height: var(--height);
+    --background: transparent;
+    --color: #000;
+    --borderColor: "#000";
+}
+
+.plack-wrap .plack-row {
+    width: 100%;
+    display: table-row;
+}
+
+.plack-wrap .plack-item {
+    display: table-cell;
+    box-sizing: border-box;
+    padding-left: 10px;
+    width: var(--width);
+    background: var(--background);
+    word-break: break-all;
+    vertical-align: middle;
+}
+
+.plack-wrap .plack-item .plack-item-wrap {
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.plack-wrap.separate-line .plack-item .plack-item-wrap {
+    border-left: solid 2px var(--borderColor);
+    padding-left: 10px;
+    width: 100%;
+}
+
+.plack-wrap .plack-item .plack-item-title {
+    --color: #000;
+    --fontSize: 16px;
+    color: var(--color);
+    font-size: var(--fontSize);
+}
+
+.plack-wrap .plack-item .plack-item-data {
+    --color: #000;
+    --fontSize: 26px;
+    color: var(--color);
+    font-size: var(--fontSize);
+}
+
+.plack-wrap .plack-item .plack-item-title, .plack-wrap .plack-item .plack-item-data {
+    display: inline-block;
+    width: 100%;
+}
+/* plack */
