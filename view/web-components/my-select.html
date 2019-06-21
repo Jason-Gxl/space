@@ -1,0 +1,45 @@
+<template id="tpl1">
+	<div></div>
+	<ul></ul>
+</template>
+<script type="text/javascript">
+	;(function() {
+		var compomnentDocument = document.currentScript.ownerDocument;
+
+		var util = {
+			initOptions: function(list, showName) {
+				var str = "";
+
+				list.forEach(function(item, index) {
+					str += "<li index=" + index + ">" + item[showName] + "</li>";
+				});
+
+				return str;
+			}
+		};
+
+		class MySelect extends HTMLElement {
+			constructor() {
+				super();
+
+				var shadowRoot = this.attachShadow({mode: "open"});
+				var list = JSON.parse(this.getAttribute("list"));
+				var tpl = compomnentDocument.getElementById("tpl1").content.cloneNode(true);
+				var showName = this.getAttribute("showName");
+				var str = "";
+
+				if(list && (list instanceof Array) && list.length>0) {
+					str = util.initOptions(list, showName);
+				}
+
+				tpl.children[1].innerHTML = str;
+				shadowRoot.appendChild(tpl);
+			}
+			attributeChangedCallback(params) {
+				console.log(params);
+			}
+		}
+
+		customElements.define("my-select", MySelect);
+	}());
+</script>

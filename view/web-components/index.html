@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Web Components</title>
+	<meta charset="utf-8">
+	<link rel="import" type="text/html" href="/view/web-components/my-select.html"></link>
+</head>
+<body>
+	<my-select id="mySelect" showName="name"></my-select>
+</body>
+<script type="text/javascript">
+	;(function() {
+		var list = [{name: "Jason", id: 0}, {name: "Jacky", id: 1}, {name: "Marry", id: 2}];
+		var mySelectEle = document.getElementById("mySelect");
+		mySelectEle.setAttribute("list", JSON.stringify(list));
+	}());
+</script>
+</html>
