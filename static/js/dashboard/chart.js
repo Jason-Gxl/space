@@ -8,14 +8,8 @@
     var toString = Object.prototype.toString;
     // echarts支持的所有事件
     var chartEvents = ['click', 'dblclick', 'mousedown', 'mousemove', 'mouseup', 'mouseover', 'mouseout', 'globalout', 'contextmenu'];
-    // 存储被选中的图表对象
-    var selected = null;
     // 图表层级
     var zIndex = 1000;
-    // 图表编号
-    var chartNumber = 1;
-    // 图表编号对应图表
-    var chartNumberMap = {};
     // 定时器计数器
     var timeLoopCount = -1;
 
@@ -167,6 +161,9 @@
                 yBtn.style.setProperty("top", top + "px");
                 lastPoint = e.clientY;
                 wrap.style.setProperty("top", -top * ty  + "px");
+
+                e.stopPropagation();
+                e.preventDefault();
             });
         }
 
@@ -341,10 +338,9 @@
         this._filters = [];
         params.title = void(0)===params.title?"无标题":params.title;
         params.zIndex = isNaN(params.zIndex)?zIndex:params.zIndex;
-        params.chartNumber = isNaN(params.chartNumber)?chartNumber:params.chartNumber;
-
-        chartNumber = params.chartNumber + 1;
-        chartNumberMap[params.chartNumber] = this;
+        params.chartNumber = isNaN(params.chartNumber)?dashboard._chartNumber:params.chartNumber;
+        dashboard._chartNumber = Math.max(dashboard._chartNumber, params.chartNumber) + 1;
+        dashboard._chartNumberMap[params.chartNumber] = this;
 
         var self = this,
             // 创建echarts图表需要的参数
@@ -431,7 +427,7 @@
         // 如果有过滤条件，需要注册监听器
         if(filters) {
             dashboard.on(function(_params) {
-                if(!_params || -1===_params.links.indexOf(params.id)) return ;
+                if(!_params || -1===_params.links.indexOf(params.chartNumber)) return ;
                 params.filterCallback && params.filterCallback.call(self, _params);
             });
 
@@ -484,10 +480,9 @@
             dashboard.addEvent(ele, "click", function() {
                 var args = [].slice.call(arguments, 0),
                     e = args[0] || window.event;
-                selected && selected.hidePos();
+                dashboard._selected && dashboard._selected.hidePos();
                 self.showPos();
-                selected = self;
-                self.dashboard._selected = selected;
+                dashboard._selected = self;
                 e.stopPropagation();
                 e.preventDefault();
             });
@@ -558,7 +553,7 @@
 
             // 编号改变事件
             dashboard.addEvent(ele.getElementsByClassName("nubmer-input")[0], "change", function() {
-                if(chartNumberMap[this.value] && chartNumberMap[this.value]!=self) {
+                if(dashboard._chartNumberMap[this.value] && dashboard._chartNumberMap[this.value]!=self) {
                     this.value = params.chartNumber;
                     if(params.error) params.error.call(self, {code: 0, message: "编号重复"});
                     return ;
@@ -572,10 +567,7 @@
             dashboard.addClass(ele, "has-pos");
             ele.getElementsByClassName("nubmer-input")[0].value = params.chartNumber;
         } else {
-            this._filters.some(function(filter) {
-                filter.status && dashboard.addClass(filterWrap, "has-filter");
-                return filter.status;
-            });
+            this._filters.length>0 && dashboard.addClass(filterWrap, "has-filter");
         }
         
         params.showTitle && self.showTitle();
@@ -734,6 +726,7 @@
         echart.setOption(options);
 
         setTimeout(function() {
+            self.scroll && self.scroll.destory();
             self.scroll = new Scroll(self, self.ele.getElementsByClassName("chart-wrap-inner")[0]);
         }, 0);
     };

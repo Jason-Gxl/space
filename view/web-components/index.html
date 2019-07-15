@@ -3,16 +3,31 @@
 <head>
 	<title>Web Components</title>
 	<meta charset="utf-8">
-	<link rel="import" type="text/html" href="/view/web-components/my-select.html"></link>
+	<link rel="import" type="text/html" href="/view/web-components/my-select"></link>
+	<style type="text/css">
+		.app {
+			font-family: 'Avenir', Helvetica, Arial, sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			text-align: center;
+			color: #2c3e50;
+			margin-top: 60px;
+		}
+	</style>
 </head>
-<body>
-	<my-select id="mySelect" showName="name"></my-select>
+<body class="app">
+	aaa
+	<!-- <my-select id="mySelect" showName="name"></my-select> -->
+	<hello-world msg="Welcome to Your Vue.js App"></hello-world>
+	<!-- <hello-world2 msg="Welcome to Your Vue.js App"></hello-world2> -->
 </body>
-<script type="text/javascript">
+<script type="text/javascript" src="/static/js/web-components/webcomponents-sd-ce-pf.js"></script>
+<script type="text/javascript" src="http://localhost:8080/app.js"></script>
+<!-- <script type="text/javascript">
 	;(function() {
 		var list = [{name: "Jason", id: 0}, {name: "Jacky", id: 1}, {name: "Marry", id: 2}];
 		var mySelectEle = document.getElementById("mySelect");
 		mySelectEle.setAttribute("list", JSON.stringify(list));
 	}());
-</script>
+</script> -->
 </html>

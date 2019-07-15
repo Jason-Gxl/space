@@ -164,7 +164,7 @@
             css: {title: {"font-size": 20}, wrap: {width: 500, left:450}},
             filters: {name: {type: "String", status: true}},
             click: function(e) {
-                return [{key: "name", value: e.name, links: [0], dashboardId: 0}];
+                return [{key: "name", value: e.name, links: [1], dashboardId: 0}];
             },
             filterCallback: function(param) {
                 console.log(param);

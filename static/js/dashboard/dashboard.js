@@ -135,6 +135,10 @@
         this._chartList = [];
         // 声明一个私有空对象来存储被选中的图表对象
         this._selected = null;
+        // 声明一个私有变量存储图表编号
+        this._chartNumber = 1;
+        // 存储编号与图表的对应关系
+        this._chartNumberMap = {};
         var self = this;
 
         Object.defineProperty(this, "params", {
@@ -233,6 +237,12 @@
     Dashboard.prototype.getChartByIndex = function(index) {
         if(void(0)===index) return ;
         return this._chartList[index];
+    };
+
+    // 通过索引找chart对象
+    Dashboard.prototype.getChartByNumber = function(number) {
+        if(void(0)===number) return ;
+        return this._chartNumberMap[number];
     };
 
     // 获取所有图表对象

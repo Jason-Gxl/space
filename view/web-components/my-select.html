@@ -35,11 +35,23 @@
 				tpl.children[1].innerHTML = str;
 				shadowRoot.appendChild(tpl);
 			}
-			attributeChangedCallback(params) {
-				console.log(params);
+			static get TAG_NAME() {
+				return "my-select";
+			}
+			static get observedAttributes() {
+				return ["list"];
+			}
+			attributeChangedCallback(attrName, oldValue, newValue) {
+				var list = JSON.parse(newValue);
+				var showName = this.getAttribute("showName");
+				var str = "";
+
+				if(list && (list instanceof Array) && list.length>0) {
+					str = util.initOptions(list, showName);
+				}
 			}
 		}
 
-		customElements.define("my-select", MySelect);
+		customElements.define(MySelect.TAG_NAME, MySelect);
 	}());
 </script>
