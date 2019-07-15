@@ -1,6 +1,6 @@
 (function($) {
   "use strict";
-  $(window.document).on("DOMContentLoaded", function() {
+  $(window).on("load", function() {
     // makes sure the whole site is loaded
     //preloader
     $("#status").fadeOut(); // will first fade out the loading animation
