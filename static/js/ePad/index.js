@@ -18,7 +18,7 @@
 			move: isMobile?"touchmove":"mouserun",
 			up: isMobile?"touchend":"mouseup",
 			wheel: isFireFox?"DOMMouseScroll":"mousewheel",
-			fullScreen: isIE?"MSFullscreenChange":(isChrome?"webkitfullscreenchange":(isFireFox?"mozfullscreenchange":"fullscreenchange")),
+			fullScreen: isIE?"MSFullscreenChange":(isChrome?"fullscreenchange":(isFireFox?"mozfullscreenchange":"fullscreenchange")),
 		},
 		// 工具栏不同的布局对应的className
 		layoutClassMap = {
@@ -2070,7 +2070,7 @@
 			self.params.color = this.value;
 		});
 
-		ele.addEvent(wrap.getElementsByClassName("pad-wrap")[0], eventMap["fullScreen"], function() {
+		ele.addEvent(wrap.getElementsByClassName("pad-wrap")[0], eventMap['fullScreen'], function(e) {
 			isFullScreen = !isFullScreen;
 			ele.removeClass(fullScreenBtn, isFullScreen?"icon-enlarge":"icon-narrow");
 			ele.addClass(fullScreenBtn, isFullScreen?"icon-narrow":"icon-enlarge");
@@ -2079,9 +2079,9 @@
 		var fullScreen = function(flag) {
 			if(!isMobile) {
 				flag?fullScreenInterface.call(wrap.getElementsByClassName("pad-wrap")[0]):cancelFullScreenInterface.call(document);
-			}else {				
-				flag?ele.addClass(wrap, "pad-full-screen"):ele.removeClass(wrap, "pad-full-screen");
+			} else {
 				isFullScreen = flag;
+				flag?ele.addClass(wrap, "pad-full-screen"):ele.removeClass(wrap, "pad-full-screen");
 				ele.removeClass(fullScreenBtn, isFullScreen?"icon-enlarge":"icon-narrow");
 				ele.addClass(fullScreenBtn, isFullScreen?"icon-narrow":"icon-enlarge");
 				self.tab.active.call(self, self.tab.getActive().id);
