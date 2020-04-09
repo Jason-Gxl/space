@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * 服务
  */
