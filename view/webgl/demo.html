@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>~>^<~</title>
+	<meta charset="utf-8" />
+	<style type="text/css">
+		html, body, ul, li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        body {
+        	width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        canvas {
+        	border: solid 1px #cdcdcd;
+        }
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="300"></canvas>
+</body>
+<script type="notjs" id="2d-vertex-shader">
+	// 声明一个变量，此变量将从缓冲区中读取数据
+	attribute vec4 a_position;
+
+	// 所有着色器都需要的main方法
+	void main() {
+
+		// gl_Position是一个顶点着色器主要设置的变量
+		gl_Position = a_position;
+	}
+</script>
+<script type="notjs" id="2d-fragment-shader">
+	// 片断着色器没有默认精度，所以我们设置一个精度
+	precision mediump float;
+
+	// 所有着色器都需要的main方法
+	void main() {
+
+		// gl_FragColor是一个片断着色器主要设置的变量
+		gl_FragColor = vec4(1, 0, 0.5, 1);
+	}
+</script>
+<script type="text/javascript">
+	/**
+	 * 创建着色器对象接口
+	 * @param  {[Object]} gl     webgl对象
+	 * @param  {[String]} type   着色器类型
+	 * @param  {[String]} source 着色器模板
+	 * @return {[Object]}        着色器对象
+	 */
+	function createShader(gl, type, source) {
+		// 根据类型创建对应的着色器对象
+		var shader = gl.createShader(type);
+		// 将着色器模板注入到着色器对象
+		gl.shaderSource(shader, source);
+		// 编译着色器对象
+		gl.compileShader(shader);
+		// 获取着色器状态
+		var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
+		if(success) return shader;
+		console.log(gl.getShaderInfoLog(shader));
+		// 删除创建失败的着色器对象，释放内存
+		gl.deleteShader(shader);
+	}
+
+	/**
+	 * 创建着色程序
+	 * @param  {[Object]} gl             webgl对象
+	 * @param  {[Object]} vertexShader   顶点着色器对象
+	 * @param  {[Object]} fragmentShader 片断着色器对象
+	 * @return {[Object]}                着色程序
+	 */
+	function createProgram(gl, vertexShader, fragmentShader) {
+		// 创建着色程序
+		var program = gl.createProgram();
+		// 将顶点着色器对象关联到着色程序
+		gl.attachShader(program, vertexShader);
+		// 将片断着色器对象关联到着色程序
+		gl.attachShader(program, fragmentShader);
+		// 将着色程序对象关联到webgl
+		gl.linkProgram(program);
+		// 获取着色程序对象当前状态
+		var success = gl.getProgramParameter(program, gl.LINK_STATUS);
+		if(success) return program;
+		// 删除创建失败的着色程序对象，释放内存
+		gl.deleteProgram(program);
+	}
+
+	(function main() {
+		var canvas = document.getElementById("canvas");
+		// 创建webgl对象
+		var gl = canvas.getContext("webgl");
+
+		if(!gl) return ;
+		// 获取着色器模板
+		var vertexShaderSource = document.getElementById("2d-vertex-shader").text;
+		var fragmentShaderSource = document.getElementById("2d-fragment-shader").text;
+		// 调用创建着色器接口创建着色器对象
+		var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+		var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+		if(!vertexShader || !fragmentShader) return ;
+		// 调用创建着色程序接口创建着色程序
+		var program = createProgram(gl, vertexShader, fragmentShader);
+		// 获取顶点着色器对象中声明的变量
+		var positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+		// 创建数据缓冲区
+		var positionBuffer = gl.createBuffer();
+		// 将数据缓冲区绑定到数据入口
+		gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+		var positions = [
+			0, 0,
+			0, 0.5,
+			0.7, 0
+		];
+
+		// 将顶点数据放入缓冲区中
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+		// 告诉webgl裁剪空间的位置
+		gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+		// 清理画板
+		gl.clearColor(0, 0, 0, 0);
+		gl.clear(gl.COLOR_BUFFER_BIT);
+		// 告诉webgl使用哪个着色程序
+		gl.useProgram(program);
+		// 启用变量
+		gl.enableVertexAttribArray(positionAttributeLocation);
+		// 为顶点着色器对象中的变量设置从缓冲区中取值的规则
+		var size = 2;	// 每次取2个值
+		var type = gl.FLOAT;	// 取得的值的类型
+		var normalize = false;	// 是否需要归一化
+		var stride = 0;	// 取值前位移0
+		var offset = 0;	// 从0下标开始取值
+		gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
+		// 开始绘图
+		var primitiveType = gl.TRIANGLES;	// 绘制三角形
+		var offset = 0;	// 从0下标开始取值
+		var count = 3;	// 顶点着色器运行3次
+		gl.drawArrays(primitiveType, offset, count);
+	}());
+</script>
+</html>

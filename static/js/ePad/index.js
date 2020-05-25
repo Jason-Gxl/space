@@ -935,7 +935,7 @@
 
 					self.tab.resizePad(cWidth, cHeight);
 					self.tab.resizePadPixel(pWidth, pHeight);
-					ctx.drawImage(img, (pWidth-imgWidth)/2, (pHeight-imgHeight)/2, imgWidth, imgHeight);
+					ctx.drawImage(img, (pWidth-imgWidth)/2, (pHeight-imgHeight)/2, imgWidth * 5, imgHeight *5);
 				} else {
 					var pw = canvas.width,
 						ph = canvas.height,

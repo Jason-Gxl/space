@@ -10,11 +10,11 @@
                 <div class="count"></div>\
             </div>\
         </div>';
-        var skills = [
-            {name: "前端3大件", percent: 90},
-            {name: "VUE全家桶", percent: 80},
-            {name: "jQuery", percent: }
-        ];
+        // var skills = [
+        //     {name: "前端3大件", percent: 90},
+        //     {name: "VUE全家桶", percent: 80},
+        //     {name: "jQuery", percent: }
+        // ];
     }());
 
 

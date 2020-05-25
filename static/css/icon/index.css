@@ -1,0 +1,81 @@
+.icon {
+	display: inline-block;
+	background: #444;
+	--color: #444;
+}
+
+.icon-right {
+	width: 5px;
+	height: 2px;
+	box-shadow: -1px -1px var(--color), 
+		-2px -2px var(--color), 
+		-3px -3px var(--color), 
+		-4px -4px var(--color), 
+		-5px -5px var(--color),
+		-6px -6px var(--color),
+		-7px -7px var(--color),
+		-1px 1px var(--color), 
+		-2px 2px var(--color), 
+		-3px 3px var(--color), 
+		-4px 4px var(--color), 
+		-5px 5px var(--color),
+		-6px 6px var(--color),
+		-7px 7px var(--color);
+}
+
+.icon-top {
+	width: 2px;
+	height: 5px;
+	box-shadow: -1px 1px var(--color),
+		-2px 2px var(--color),
+		-3px 3px var(--color),
+		-4px 4px var(--color),
+		-5px 5px var(--color),
+		-6px 6px var(--color),
+		-7px 7px var(--color),
+		1px 1px var(--color),
+		2px 2px var(--color),
+		3px 3px var(--color),
+		4px 4px var(--color),
+		5px 5px var(--color),
+		6px 6px var(--color),
+		7px 7px var(--color);
+}
+
+.icon-left {
+	width: 5px;
+	height: 2px;
+	box-shadow: 1px -1px var(--color), 
+		2px -2px var(--color), 
+		3px -3px var(--color), 
+		4px -4px var(--color), 
+		5px -5px var(--color),
+		6px -6px var(--color),
+		7px -7px var(--color),
+		1px 1px var(--color), 
+		2px 2px var(--color), 
+		3px 3px var(--color), 
+		4px 4px var(--color), 
+		5px 5px var(--color),
+		6px 6px var(--color),
+		7px 7px var(--color);
+}
+
+.icon-bottom {
+	width: 2px;
+	height: 5px;
+	box-shadow: -1px -1px var(--color),
+		-2px -2px var(--color),
+		-3px -3px var(--color),
+		-4px -4px var(--color),
+		-5px -5px var(--color),
+		-6px -6px var(--color),
+		-7px -7px var(--color),
+		1px -1px var(--color),
+		2px -2px var(--color),
+		3px -3px var(--color),
+		4px -4px var(--color),
+		5px -5px var(--color),
+		6px -6px var(--color),
+		7px -7px var(--color);
+}

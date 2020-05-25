@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/static/font/ePad/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="/static/css/ePad/index.css">
+		<link rel="stylesheet" type="text/css" href="/view/ePad/css/index.css">
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+			}
+
+			#wrap1 {
+				width: 500px;
+				height: 500px;
+				margin-left: 10px;
+				background: red;
+				transform: translate(100px, 0);
+			}
+
+			#wrap2 {
+				width: 300px;
+				height: 300px;
+				/*margin-left: 100px;*/
+				background: blue;
+				position: absolute;
+				
+			}
+
+			#wrap3 {
+				width: 100px;
+				height: 100px;
+				margin-left: 100px;
+				background: green;
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap1">
+			<div id="wrap2">
+				<div id="wrap3"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		document.getElementById("wrap1").addEventListener("click", function(e) {
+			console.log("offsetX: %s, layerX: %s, clientX: %s, pageX: %s, screenX: %s", e.offsetX, e.layerX, e.clientX, e.pageX, e.screenX);
+		}, false);
+
+		document.getElementById("wrap2").addEventListener("click", function(e) {
+			console.log("offsetX: %s, layerX: %s, clientX: %s, pageX: %s, screenX: %s", e.offsetX, e.layerX, e.clientX, e.pageX, e.screenX);
+		}, false);
+
+		document.getElementById("wrap3").addEventListener("click", function(e) {
+			console.log("offsetX: %s, layerX: %s, clientX: %s, pageX: %s, screenX: %s", e.offsetX, e.layerX, e.clientX, e.pageX, e.screenX);
+		}, false);
+	</script>
+</html>
